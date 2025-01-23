@@ -1,0 +1,35 @@
+version: '4'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    volumes:
+      - ./storage/mongo:/data/db
+    ports:
+      - "27017:27017"
+
+  auth:
+    container_name: auth
+    build: ./backend/auth/
+    command: bash -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - ./backend/auth/.:/app:rw
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+  
+  react-app:
+    container_name: frontend
+    restart: always
+    build: ./frontend/app/
+    ports:
+      - "3000:80"
+    depends_on:
+      - auth
