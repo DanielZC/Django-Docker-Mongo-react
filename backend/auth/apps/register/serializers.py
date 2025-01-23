@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from core.db import ConnectionDB
+from common.crypt import Password
 
 
 class ClientInformationSerializer(serializers.Serializer):
@@ -22,6 +23,12 @@ class RegisterUserSerializer(serializers.Serializer):
         if result:
             raise ValueError("Este correo electronico ya ha sido registrado")
         return value
+
+    def validate_contraseña(self, value):
+
+        crypt = Password()
+        pws = crypt.encrypt_pws(value)
+        return pws
 
     def insert(self, data):
 
