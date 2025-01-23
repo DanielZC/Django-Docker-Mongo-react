@@ -1,6 +1,8 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 from .serializers import RegisterUserSerializer
 from core.db import ConnectionDB
@@ -22,6 +24,14 @@ def db_vars(request):
         return Response(e.args[0], status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@swagger_auto_schema(
+    method="post",
+    operation_description="Crea un usuario en la aplicación.",
+    responses={
+        200: "Ok",
+    },
+    request_body=RegisterUserSerializer,
+)
 @api_view(["POST"])
 def register_user(request):
     try:
@@ -36,6 +46,13 @@ def register_user(request):
         return Response(e.args[0], status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@swagger_auto_schema(
+    method="get",
+    operation_description="Obtiene una lista de usuarios creados.",
+    responses={
+        200: RegisterUserSerializer(many=True),
+    },
+)
 @api_view(["GET"])
 def get_user(request):
 
