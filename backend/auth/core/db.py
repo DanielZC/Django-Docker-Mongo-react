@@ -79,3 +79,7 @@ class ConnectionDB:
         result = collection.aggregate(pipeline)
         list_results = list(result)
         return list_results
+
+    def delete_many(self, collection_name, filter):
+        collection = self.get_collection(collection_name)
+        return collection.delete_many(filter)

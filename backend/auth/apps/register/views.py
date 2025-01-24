@@ -2,7 +2,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 from .serializers import RegisterUserSerializer
 from core.db import ConnectionDB
@@ -16,6 +15,7 @@ def db_vars(request):
         connection_db = ConnectionDB()
         ping = connection_db.db_ping()
 
+        connection_db.delete_many("usuarios", {})
         return Response(
             [connection_db.get_db_connection_vars(), ping], status=status.HTTP_200_OK
         )
