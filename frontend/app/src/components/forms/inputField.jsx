@@ -1,6 +1,6 @@
 const InputField = ({ label, name, type = "text", value, onChange, error }) => (
   <div className="mb-4">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+    <label htmlFor={name} className="block text-sm font-medium text-white">
       {label}
     </label>
     <input
@@ -9,7 +9,8 @@ const InputField = ({ label, name, type = "text", value, onChange, error }) => (
       type={type}
       value={value}
       onChange={onChange}
-      className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${
+      placeholder={label}
+      className={`mt-1 block w-full bg-gray-900 p-1 text-white border-b-2 border-blue-500 shadow-md sm:text-sm md:text-md ${
         error ? "border-red-500" : ""
       }`}
     />
