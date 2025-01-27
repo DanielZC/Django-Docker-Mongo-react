@@ -3,13 +3,6 @@ import { useForm } from "react-hook-form";
 import InputField from "../../components/forms/inputField";
 
 const Register = () => {
-  const initialValues = {
-    nombre: "",
-    correo_electronico: "",
-    contraseña: "",
-    confirmar_contraseña: "",
-  };
-
   const {
     register,
     handleSubmit,
@@ -18,9 +11,7 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    alert(
-      `datos: ${data.nombre} - ${data.email} - ${data.contraseña} - ${data.confirmar_contraseña}`
-    );
+    console.log("enviar datos");
   };
 
   return (
