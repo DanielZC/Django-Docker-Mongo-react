@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../../components/forms/inputField";
+import { createUser } from "../../api/auth";
 
 const Register = () => {
   const {
@@ -11,7 +12,12 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("enviar datos");
+    try {
+      const response = await createUser(data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
