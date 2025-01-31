@@ -12,12 +12,9 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      const response = await createUser(data);
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    data["cliente"] = null;
+    const response = await createUser(data);
+    console.log(response);
   };
 
   return (
@@ -33,7 +30,7 @@ const Register = () => {
         />
         <InputField
           label="Correo electronico"
-          name="email"
+          name="correo_electronico"
           type="email"
           register={register}
           options={{
