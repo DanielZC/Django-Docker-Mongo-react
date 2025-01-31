@@ -31,7 +31,7 @@ class LoginSerializer(serializers.Serializer):
                     "nombre": result["nombre"],
                     "correo_electronico": result["correo_electronico"],
                 }
-        raise ValueError("Usuario y/o contraseña incorrecta")
+        raise serializers.ValidationError("Usuario y/o contraseña incorrecta")
 
     def login(self, data):
 
@@ -42,4 +42,4 @@ class LoginSerializer(serializers.Serializer):
             return True
 
         except ConnectionError as e:
-            raise ValueError(str(e))
+            raise serializers.ValidationError(str(e))

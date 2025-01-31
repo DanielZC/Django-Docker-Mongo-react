@@ -21,7 +21,9 @@ class RegisterUserSerializer(serializers.Serializer):
         result = db_operations.find_one("usuarios", {"correo_electronico": value})
 
         if result:
-            raise ValueError("Este correo electronico ya ha sido registrado")
+            raise serializers.ValidationError(
+                "Este correo electronico ya ha sido registrado"
+            )
         return value
 
     def validate_contraseña(self, value):
@@ -37,7 +39,7 @@ class RegisterUserSerializer(serializers.Serializer):
             operation = db_operations.insert_one("usuarios", data)
             return operation
         except ConnectionError as e:
-            raise ValueError(e.args[0])
+            raise serializers.ValidationError(e.args[0])
 
     def get(self):
 
@@ -46,4 +48,4 @@ class RegisterUserSerializer(serializers.Serializer):
             result = db_operations.find("usuarios")
             return result
         except ConnectionError as e:
-            raise ValueError(e.args[0])
+            raise serializers.ValidationError(e.args[0])
