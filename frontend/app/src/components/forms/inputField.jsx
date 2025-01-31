@@ -1,4 +1,12 @@
-const InputField = ({ label, name, type = "text", value, onChange, error }) => (
+const InputField = ({
+  label,
+  name,
+  register,
+  type = "text",
+  value,
+  onChange,
+  error,
+}) => (
   <div className="mb-4">
     <label htmlFor={name} className="block text-sm font-medium text-white">
       {label}
@@ -8,6 +16,7 @@ const InputField = ({ label, name, type = "text", value, onChange, error }) => (
       name={name}
       type={type}
       value={value}
+      {...register(name)}
       onChange={onChange}
       placeholder={label}
       className={`mt-1 block w-full bg-gray-900 p-1 text-white border-b-2 border-blue-500 shadow-md sm:text-sm md:text-md ${

@@ -1,15 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../../components/forms/inputField";
+import { createUser } from "../../api/auth";
 
 const Register = () => {
-  const initialValues = {
-    nombre: "",
-    correo_electronico: "",
-    contraseña: "",
-    confirmar_contraseña: "",
-  };
-
   const {
     register,
     handleSubmit,
@@ -18,9 +12,9 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    alert(
-      `datos: ${data.nombre} - ${data.email} - ${data.contraseña} - ${data.confirmar_contraseña}`
-    );
+    data["cliente"] = null;
+    const response = await createUser(data);
+    console.log(response);
   };
 
   return (
@@ -36,7 +30,7 @@ const Register = () => {
         />
         <InputField
           label="Correo electronico"
-          name="email"
+          name="correo_electronico"
           type="email"
           register={register}
           options={{
