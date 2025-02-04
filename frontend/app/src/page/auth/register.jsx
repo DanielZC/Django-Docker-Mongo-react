@@ -69,7 +69,10 @@ const Register = () => {
           error={errors.confirmar_contraseña}
         />
         <div className="max-w-md text-center">
-          <a href="https://www.youtube.com" className="text-white">
+          <a
+            href="https://www.youtube.com"
+            className="text-white hover:underline"
+          >
             ¿Olvidaste tu contraseña?
           </a>
         </div>
